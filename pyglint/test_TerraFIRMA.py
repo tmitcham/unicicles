@@ -105,7 +105,7 @@ def read_atm_nc(nc_file):
     
     area = prep_um(nc_um_in['tile_surface_area'])
     spy = 3600*360*24
-    smb = prep_um(nc_um_in['ice_smb']) / 918 * spy # values suggest kg/s
+    smb = prep_um(nc_um_in['ice_smb']) / 918 * spy * (1000/918) # values suggest kg/s
     stemp = prep_um(nc_um_in['ice_stemp']) + 273.15
     snow = prep_um(nc_um_in['nonice_snowdepth'])
     shflx = prep_um(nc_um_in['snow_ice_hflux'])
@@ -122,7 +122,7 @@ def read_atm_nc(nc_file):
 
     # These are the values that are hardcoded into Glint for nec=10
     topo_max = np.array([0.0, 200.0, 400.0, 700.0, 1000.0, 1300.0, 1600.0, 2000.0, 2500.0, 3000.0, 10000.0])
-    
+
     topo = np.zeros(smb.shape)
     for ec in range(0,nec):
         topo[ec,:,:] = topo_mid[ec]  
