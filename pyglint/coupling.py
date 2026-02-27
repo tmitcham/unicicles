@@ -93,6 +93,8 @@ def glint_conservation_adjust(f2d_ism_nc, mask_ism,
     # Flatten to length N*M with C-order so that index cc = J*M + I matches cell_id(I,J,M,N)
     atm_col_total_flat = atm_col_total_2d.ravel(order='C')
 
+    atm_total = np.sum(atm_col_total_flat)
+
     # Prepare flattened local mappings and local smb
     mapped_ids = ism_to_atm_map.ravel(order='C').astype(np.int64)
     f2d_flat = f2d_ism.ravel(order='C')
@@ -122,6 +124,14 @@ def glint_conservation_adjust(f2d_ism_nc, mask_ism,
     # Update flattened f2d and reshape back
     f2d_flat += delta_per_local
     f2d_ism = f2d_flat.reshape(f2d_ism.shape, order='C')
+
+    f2d_ism = np.where(mask_ism, f2d_ism, 0.0)
+        
+    ism_total = np.sum(f2d_ism) * area_factor
+
+    if ism_total > 1e-12:
+
+        f2d_ism*=atm_total/ism_total
 
     return np.ma.masked_array(f2d_ism, ~mask_ism)
 
