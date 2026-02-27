@@ -96,15 +96,12 @@ def read_ism_nc(cfg):
 def read_atm_nc(nc_file):
    
     nc_um_in = Dataset(nc_file,'r')
-    ilo, ihi = 148, 188
-    jlo, jhi = 119, 140
-    ilo, ihi = 0, -1
-    jlo, jhi = 0, -1
-    grid = Uniform2DGrid(nc_um_in['longitude'][ilo:ihi].data,
-                            nc_um_in['latitude'][jlo:jhi].data)
+
+    grid = Uniform2DGrid(nc_um_in['longitude'][:].data,
+                            nc_um_in['latitude'][:].data)
 
     def prep_um(arr):
-        return arr[:,jlo:jhi,ilo:ihi]
+        return arr[:,:,:]
     
     area = prep_um(nc_um_in['tile_surface_area'])
     spy = 3600*360*24
