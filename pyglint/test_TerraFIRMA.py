@@ -116,12 +116,13 @@ def read_atm_nc(nc_file):
     nec = z_id.shape[0]
     
     
-    #making this up too
-    topo_mid = np.array([31.86, 297.01, 551.87, 846.16, 1151.70,
-                1457.07, 1808.83, 2257.02,  2737.89, 3099.39])
-    topo_max = np.zeros(nec+1) 
-    topo_max[1:nec] = 0.5*(topo_mid[0:nec-1] + topo_mid[1:nec])
-    topo_max[nec] = 5000.0
+    # These are passed to Glint from command line in uncicles
+    topo_mid = np.array([31.96, 301.57, 550.11, 850.85, 1156.89,
+                              1453.16, 1806.74, 2268.25, 2753.70, 3341.4])
+
+    # These are the values that are hardcoded into Glint for nec=10
+    topo_max = np.array([0.0, 200.0, 400.0, 700.0, 1000.0, 1300.0, 1600.0, 2000.0, 2500.0, 3000.0, 10000.0])
+    
     topo = np.zeros(smb.shape)
     for ec in range(0,nec):
         topo[ec,:,:] = topo_mid[ec]  

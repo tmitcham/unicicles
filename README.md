@@ -122,4 +122,5 @@ The outputs from the test_TerraFIRMA.py file are saved in csv files in the outpu
 Starting from the 'main' branch, which was the version of pyglint when starting the TerraFIRMA comparisons, the branches build on each other as follows:
 - main: original version of pyglint when starting the TerraFIRMA comparisons
 - all_lat_lon: removes the use of ilo:ihi etc. which removed the final lat/lon
+- topo_vals: changes the topo_mid and topo_max values to match those (we think) used in Glint
 
