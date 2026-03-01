@@ -75,6 +75,10 @@ def main():
         if cfg.get("gr_fl_mask"):
             continue
 
+        # Don't plot cx209 mas data
+        if "cx209" in cfg.get("nc_file", ""):
+            continue
+
         # Load timeseries
         ds = xr.load_dataset(results_path)
 
@@ -86,8 +90,8 @@ def main():
 
         # Build label from metadata + config
         label = (
-            f"{meta['git_branch']} | "
-            f"{cfg.get('nc_file')[:7]}"
+            f"{meta['git_branch']}"
+            #f"{cfg.get('nc_file')[:7]}"
         )
 
         plt.plot(time[1:], values[1:], label=label)
