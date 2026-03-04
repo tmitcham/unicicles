@@ -180,12 +180,25 @@ def test_terrafirma(cfg):
 
         delta_t = 1.0 # typical?
 
-        smb, stemp, delta_snow, shflx \
-        = atm_to_ism(smb_um, stemp_um, snow_um, shflx_um,
-                     topo_um, area_um, grid_um,
-                     topo_ism, thk_ism, frac_ism, mask_ism, grid_ism,
-                     up_tr, down_tr, delta_t)
+        if cfg['icesheet'] == 'AIS':
+
+            smb, stemp, delta_snow, shflx \
+            = atm_to_ism(smb_um, stemp_um, snow_um, shflx_um,
+                        topo_um, area_um, grid_um,
+                        topo_ism, thk_ism, frac_ism, mask_ism, grid_ism,
+                        up_tr, down_tr, delta_t, conservation=False)
         
+        elif cfg['icesheet'] == 'GrIS':
+
+            smb, stemp, delta_snow, shflx \
+            = atm_to_ism(smb_um, stemp_um, snow_um, shflx_um,
+                        topo_um, area_um, grid_um,
+                        topo_ism, thk_ism, frac_ism, mask_ism, grid_ism,
+                        up_tr, down_tr, delta_t)
+            
+        else:
+            raise ValueError(f"Unsupported ice sheet: {cfg['icesheet']}")
+            
         smb += delta_snow / delta_t
 
         # Convert from m/a to Gt/a in the same way as for TerraFIRMA analysis

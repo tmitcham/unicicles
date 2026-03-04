@@ -8,3 +8,9 @@ for config_file in "$CONFIG_DIR"/*.yaml; do
 done
 wait
 echo "All tests completed."
+
+echo "Making plots..."
+python plot_test_TerraFIRMA.py --icesheet AIS --variable total_smb
+python plot_test_TerraFIRMA.py --icesheet GrIS --variable total_smb
+wait
+echo "All plots completed."
