@@ -126,4 +126,5 @@ Starting from the 'main' branch, which was the version of pyglint when starting 
 - conservation: makes changes to coupling.py:glint_conservation_adjust to implement the total atmosphere column conservation in glint_downscale_gcm
 - conservation_2: Steph's additional changes to coupling.py:glint_conservation_adjust from 27/2/26
 - no_conservation_AIS: removes the conservation adjustment from the AIS test case, as it appears the Glint code may not be applying this to the AIS
+- rhoi_910: build on no_conservation_AIS but changes the value of rhoi to 910 kg/m3, which is the value used in internal calculations in Glint. Still use 918 in the final unit conversion, as I did when processing BISICLES outputs.
 

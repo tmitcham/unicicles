@@ -105,7 +105,7 @@ def read_atm_nc(nc_file):
     
     area = prep_um(nc_um_in['tile_surface_area'])
     spy = 3600*360*24
-    smb = prep_um(nc_um_in['ice_smb']) / 918 * spy # values suggest kg/s
+    smb = prep_um(nc_um_in['ice_smb']) / 910 * spy # values suggest kg/s
     stemp = prep_um(nc_um_in['ice_stemp']) + 273.15
     snow = prep_um(nc_um_in['nonice_snowdepth'])
     shflx = prep_um(nc_um_in['snow_ice_hflux'])
